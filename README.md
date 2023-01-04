@@ -29,3 +29,21 @@ I tried solutions suggested in later comments in the React issue above, but was 
 ## Expected behavior
 
 I expect there to be no warnings when using the custom Combobox component as a filter input. Instead, I see a React warning in the JavaScript console.
+
+## Screenshot
+
+![Stack trace](/screenshots/stacktrace.png "stacktrace")
+
+## Platform
+
+OS: macOS Monterey Version 12.3
+
+Browser: Google Chrome Version 108.0.5359.124 (Official Build) (arm64)
+
+## react-table version
+
+8.7.4
+
+## TypeScript Version
+
+4.9.4

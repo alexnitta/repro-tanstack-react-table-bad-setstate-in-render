@@ -76,7 +76,16 @@ export function BrokenVersion() {
       <h2 className="font-bold text-red-600 pb-2">Broken Version</h2>
       <p className="pb-2">
         This version is built with filters that each use a custom{" "}
-        <code>{`<Combobox>`}</code> component to provide autocompletion.
+        <code>{`<Combobox>`}</code> component implemented with{" "}
+        <a
+          className="underline"
+          href="https://github.com/downshift-js/downshift"
+          target="_blank"
+          rel="noreferrer"
+        >
+          downshift
+        </a>{" "}
+        to provide autocompletion.
       </p>
       <p>To reproduce the warning:</p>
       <ol className="list-decimal">
