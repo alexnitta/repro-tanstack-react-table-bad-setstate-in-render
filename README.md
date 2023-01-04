@@ -21,7 +21,7 @@ I tried solutions suggested in later comments in the React issue above, but was 
 1. Install dependencies with yarn 1.x: `yarn`
 2. Run the app locally with: `yarn dev`
 3. Open the app by pointing your browser to the **Local** URL shown by Vite, which should be: http://127.0.0.1:5173/
-4. The table shown on the left, labeled as "Working Version," does not reproduce the issue. The table shown on the right, labeled as "Broken Version," does reproduce the issue. As noted in the text above the right-hand table, the next steps to reproduce the issue are as follows:
+4. The table labeled as "Broken Version" reproduces the issue. As noted in the text above the Broken Version table, the next steps to reproduce the issue are as follows:
 5. Click on any of the First, Last, or Email filter inputs.
 6. Click one of the options in the dropdown list to set it as the filter value.
 7. Open the JavaScript console and notice a React warning.
