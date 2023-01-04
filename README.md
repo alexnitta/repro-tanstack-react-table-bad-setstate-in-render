@@ -1,17 +1,31 @@
 # Issue reproduction for @tanstack/react-table
 
-This repo is a reproduction of an issue encountered when using @tanstack/react-table.
+This repo is a reproduction of an issue encountered when using `@tanstack/react-table`.
+
+## Bug Description
+
+When using table that with filters built with a custom `<Combobox>` component implemented with [downshift](https://github.com/downshift-js/downshift), I see this React warning in the console:
+
+```
+react_devtools_backend.js:4012 Warning: Cannot update a component (`BrokenVersion`) while rendering a different component (`Combobox`). To locate the bad setState() call inside `Combobox`, follow the stack trace as described in https://reactjs.org/link/setstate-in-render
+```
+
+If I remove the custom `<Combobox>` component and use a `<datalist>` with an `<input>`, the warning does not appear.
+
+I read through [the React issue](https://github.com/facebook/react/issues/18178#issuecomment-595846312) linked in the React warning, which describes how to expand the stack trace and look for the first line that is not inside React. When I do this, I see that the first line that is not inside React is within `node_modules/@tanstack/react-table/src/index.tsx:85`, which is a `setState()` call inside the `useReactTable` hook.
+
+I tried solutions suggested in later comments in the React issue above, but was unable to prevent the warning.
 
 ## Steps to reproduce:
 
 1. Install dependencies with yarn 1.x: `yarn`
 2. Run the app locally with: `yarn dev`
 3. Open the app by pointing your browser to the **Local** URL shown by Vite, which should be: http://127.0.0.1:5173/
-4. The table shown on the left, labeled as "Working Version," does not reproduce the issue. The table shown on the right, labeled as "Broken Version," does reproduce the issue. As noted in the text above the right-hand table, if you use any of the combobox inputs below "First," "Last" or "Email" to set a filter value, then look in the JavaScript console, you'll see this React warning:
-   ```
-   react_devtools_backend.js:4012 Warning: Cannot update a component (`BrokenVersion`) while rendering a different component (`Combobox`). To locate the bad setState() call inside `Combobox`, follow the stack trace as described in https://reactjs.org/link/setstate-in-render
-   ```
+4. The table shown on the left, labeled as "Working Version," does not reproduce the issue. The table shown on the right, labeled as "Broken Version," does reproduce the issue. As noted in the text above the right-hand table, the next steps to reproduce the issue are as follows:
+5. Click on any of the First, Last, or Email filter inputs.
+6. Click one of the options in the dropdown list to set it as the filter value.
+7. Open the JavaScript console and notice a React warning.
 
 ## Expected behavior
 
-I expect there to be no warning when using my Combobox component as a filter input.
+I expect there to be no warnings when using the custom Combobox component as a filter input. Instead, I see a React warning in the JavaScript console.

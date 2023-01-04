@@ -105,15 +105,8 @@ export function Filter<TData, TValue>({
           />
         </>
       )}
-      {/*
-        Issue: when using Combobox, React throws this error message:
-          Warning: Cannot update a component (`Unknown`) while rendering a different component (`Combobox`). To locate the bad setState() call inside `Combobox`, follow the stack trace as described in https://reactjs.org/link/setstate-in-render
-
-        When I expand the stacktrace and check the
-      */}
       {withCombobox && (
         <Combobox
-          form={false}
           label={headerLabel}
           listMaxHeight={400}
           name="filter"

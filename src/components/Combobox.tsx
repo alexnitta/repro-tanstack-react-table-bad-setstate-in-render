@@ -2,6 +2,7 @@ import { useState, useCallback } from "react";
 import { useCombobox } from "downshift";
 import type {
   UseComboboxState,
+  UseComboboxStateChange,
   UseComboboxStateChangeOptions,
 } from "downshift";
 import { matchSorter } from "match-sorter";
@@ -109,6 +110,19 @@ export function Combobox({
     [options, onChange]
   );
 
+  const onInputValueChange = useCallback(
+    ({ inputValue }: UseComboboxStateChange<ComboboxOption>) => {
+      setItems(
+        matchSorter(options, inputValue ?? "", {
+          threshold: matchSorter.rankings.CONTAINS,
+          keys: ["label"],
+          baseSort: (a, b) => (a.index < b.index ? -1 : 1),
+        })
+      );
+    },
+    []
+  );
+
   const {
     isOpen,
     getLabelProps,
@@ -118,15 +132,7 @@ export function Combobox({
     getItemProps,
     selectedItem,
   } = useCombobox<ComboboxOption>({
-    onInputValueChange({ inputValue }) {
-      setItems(
-        matchSorter(options, inputValue ?? "", {
-          threshold: matchSorter.rankings.CONTAINS,
-          keys: ["label"],
-          baseSort: (a, b) => (a.index < b.index ? -1 : 1),
-        })
-      );
-    },
+    onInputValueChange,
     stateReducer,
     items,
     itemToString: item => item?.label ?? "",

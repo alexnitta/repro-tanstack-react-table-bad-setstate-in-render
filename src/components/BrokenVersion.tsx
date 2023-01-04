@@ -66,7 +66,6 @@ export function BrokenVersion() {
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    // These must be added if you use `props.renderFilters: true`
     getFilteredRowModel: getFilteredRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
