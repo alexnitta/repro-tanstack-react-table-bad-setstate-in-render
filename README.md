@@ -16,6 +16,10 @@ I read through [the React issue](https://github.com/facebook/react/issues/18178#
 
 I tried solutions suggested in later comments in the React issue above, but was unable to prevent the warning.
 
+## Link to minimal reproduction
+
+[https://stackblitz.com/edit/node-twt1uh?file=README.md](https://stackblitz.com/edit/node-twt1uh?file=README.md)
+
 ## Steps to reproduce:
 
 1. Install dependencies with yarn 1.x: `yarn`
