@@ -163,3 +163,5 @@ export function VirtualTable<TData>(
     </div>
   );
 }
+
+VirtualTable.whyDidYouRender = true;

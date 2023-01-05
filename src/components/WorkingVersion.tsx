@@ -8,7 +8,9 @@ import {
   useReactTable,
   getSortedRowModel,
   SortingState,
+  TableOptions,
 } from "@tanstack/react-table";
+import { useDeepCompareMemo } from "use-deep-compare";
 
 import type { ExampleTableItem } from "../types";
 import { makeTableItems } from "../utils";
@@ -55,21 +57,30 @@ export function WorkingVersion() {
   const [rowSelection, setRowSelection] = useState({});
   const [sorting, setSorting] = useState<SortingState>([]);
   const columns = useMemo<ColumnDef<ExampleTableItem>[]>(() => columnDefs, []);
-  const table = useReactTable({
-    data,
-    columns,
-    state: {
-      rowSelection,
-      sorting,
-    },
-    onRowSelectionChange: setRowSelection,
-    onSortingChange: setSorting,
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getFacetedUniqueValues: getFacetedUniqueValues(),
-    getFacetedMinMaxValues: getFacetedMinMaxValues(),
-  });
+
+  const tableOptions: TableOptions<ExampleTableItem> =
+    useDeepCompareMemo(() => {
+      console.log("recalculate tableOptions");
+      return {
+        data,
+        columns,
+        state: {
+          rowSelection,
+          sorting,
+        },
+        onRowSelectionChange: setRowSelection,
+        onSortingChange: setSorting,
+        getCoreRowModel: getCoreRowModel(),
+        getSortedRowModel: getSortedRowModel(),
+        getFilteredRowModel: getFilteredRowModel(),
+        getFacetedUniqueValues: getFacetedUniqueValues(),
+        getFacetedMinMaxValues: getFacetedMinMaxValues(),
+      };
+    }, [rowSelection, sorting]);
+
+  // Even with the tableOptions memoized, the table is constantly re-rendered because of hook
+  // changes within @tanstack/react-table
+  const table = useReactTable(tableOptions);
 
   return (
     <div style={{ width: table.getTotalSize() }}>
@@ -98,3 +109,5 @@ export function WorkingVersion() {
     </div>
   );
 }
+
+WorkingVersion.whyDidYouRender = true;

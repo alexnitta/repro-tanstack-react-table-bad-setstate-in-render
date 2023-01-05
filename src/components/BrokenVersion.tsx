@@ -115,3 +115,5 @@ export function BrokenVersion() {
     </div>
   );
 }
+
+// BrokenVersion.whyDidYouRender = true;

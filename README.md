@@ -51,3 +51,7 @@ Browser: Google Chrome Version 108.0.5359.124 (Official Build) (arm64)
 ## TypeScript Version
 
 4.9.4
+
+## Debugging notes 1/5/23
+
+I added whyDidYouRender to both the BrokenVersion and WorkingVersion to see if there are extra renders when using Combobox, but both of them were constantly re-rendered, so I added whyDidYouRender to WorkingVersion only to see if I could isolate the cause of the re-rendering. It looks like the cause of the re-rendering is within @tanstack/react-table - see src/components/WorkingVersion.tsx line 81.
